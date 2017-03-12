@@ -1,6 +1,10 @@
 import React from 'react'
 import '../components/Canvas.scss'
 
+var x = 1;
+       const y = Math.floor(Math.random()* 800);
+
+
 class Canvas extends React.Component {
 
 
@@ -48,12 +52,18 @@ img.src = 'sun.png'
         ctx.drawImage(img, -15, -15, 30, 30);
         // ctx.fillRect(0, 0, 20, 20); // Shadow
         ctx.restore();
+        ctx.restore();
+        ctx.save();
 
         ctx.rotate( 2 * Math.PI / 60 * ((time.getSeconds() +  time.getMilliseconds() / 1000)) * 1 );
         ctx.fillStyle = 'red';
-        ctx.translate(0, -60);
+        ctx.translate(0, 300);
+    
         var img = new Image();   // Create new img element
         img.src = 'neptune.png'
+        ctx.arc(0,0,20,20, Math.PI *2)
+        ctx.beginPath();
+        ctx.stroke()
         ctx.drawImage(img, -15, -15, 30, 30);
         // ctx.fillRect(0, 0, 20, 20); // Shadow
 
@@ -63,6 +73,22 @@ img.src = 'sun.png'
         ctx.arc(0,0,200,0, Math.PI *2)
         ctx.stroke()
         ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+
+        var img = new Image();   // Create new img element
+        img.src = 'meteor.png'
+        ctx.restore()
+       
+        if (x < 2000) { 
+            console.log(x)
+             ctx.drawImage(img,x - 50, y + 10, 40, 40);
+             ctx.drawImage(img,x * 1.4 - 50, y+ 30, 20, 20);
+             ctx.drawImage(img,x * 0.5 - 50, y +20, 60, 60);
+             ctx.drawImage(img,x * 1.15 - 50, y + 50, 25, 25);
+
+            x *= 1.016
+        }
+    
+
         window.requestAnimationFrame(this.func.bind(this))
     }
     
